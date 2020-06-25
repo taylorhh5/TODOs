@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import TodoHook from './TodoHook.js'
 
 class App extends React.Component {
   //for class component
@@ -57,6 +58,8 @@ class App extends React.Component {
         {this.state.items.map((item) => {
           return <p>{item}</p>;
         })}
+
+        <TodoHook/>
       </div>
     );
   }
