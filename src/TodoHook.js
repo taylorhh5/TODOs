@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react";
 import TodoForm from "./TodoForm.js";
 import TodoList from "./TodoList.js";
 
-const TodoHook = () => {
-  //state
+function TodoHook() {
   const [todos, setTodos] = useState([]);
 
-  //takes in a todo and adds it to array of todos
-  function addTodo(todo) {
-    setTodos([todo, ...todos]);
+
+  function addTodo(newTodo) {
+    // adds new todo to end of todos array
+    setTodos([...todos, newTodo]);
   }
 
-
   function toggleComplete(id) {
+    //set todos
     setTodos(
+      //map through todos, for every todo who's id matches the id clicked on,
+      //return everything from the todo except do the opposite of what completed is
       todos.map((todo) => {
-        if (todo.id === id) {
+        if (todo.task === id) {
           return {
             ...todo,
             completed: !todo.completed,
@@ -26,17 +28,22 @@ const TodoHook = () => {
     );
   }
 
-  return (
-    <div>
-      <h1>Todo Hook List</h1>
-      {/* <h1>{todos}</h1> */}
-      {/* pass addTodo function to TodoForm as a prop */}
-      <TodoForm addTodo={addTodo} />
+  //setTodos to if the todo.id does not equal the id selected then show it.
+  function removeTodo(id) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
 
-      {/* pass todos state as props to TodosList */}
-      <TodoList todos={todos} toggleComplete={toggleComplete} />
+  return (
+    <div className="App">
+      <div>Todo Hook </div>
+      <TodoForm addTodo={addTodo} />
+      <TodoList
+        todos={todos}
+        removeTodo={removeTodo}
+        toggleComplete={toggleComplete}
+      />
     </div>
   );
-};
+}
 
 export default TodoHook;

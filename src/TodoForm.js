@@ -1,38 +1,42 @@
 import React, { useState } from "react";
 
-function TodoForm(props) {
-//   const [data, setData] = useState({
-//     // id: "",
-//     // task: "",
-//     // completed: "",
-//   });
-const [data, setData] = useState({
-    task:''
-});
-function handleChanges(e) {
-    setData({ ...data, task: e.target.value });
+function TodoForm({addTodo}) {
+
+
+//initial todo object
+const [todoForm, setTodoForm] = useState({
+    id: "",
+    task: "",
+    completed: false
+  });
+
+  function handleTaskInputChange(e) {
+  //spread in all of todoForm plus add the task from e.target.value
+    setTodoForm({ ...todoForm, task: e.target.value });
   }
 
-  function submitTodo(e) {
-    e.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault(); // prevents browser refresh
 
-    props.addTodo(data.task);
-    //   props.setTodo({ ...form, task: "" });
+    //if statement makes sure it will only submit if task typed in
+    if (todoForm.task) {
+        //spread in everything from todoForm form and add the date
+      addTodo({ ...todoForm, id:Date.now() });
+      //then reset the form
+      setTodoForm({ ...todoForm, task: "" });
+    }
   }
 
   return (
-    <div>
-      <form onSubmit={submitTodo}>
-        <input
-          type="text"
-          name="task"
-          onChange={handleChanges}
-          value={data.task}
-        />
-        <button type="submit">Submit</button>
-      </form>
-      <h1>{data.task}</h1>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="task"
+        value={todoForm.task}
+        onChange={handleTaskInputChange}
+      />
+      <button type="submit">Submit</button>
+    </form>
   );
 }
 

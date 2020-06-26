@@ -1,10 +1,17 @@
 import React from 'react'
 
-const Todo = (props) => {
+function Todo  ({ todo, toggleComplete, removeTodo })  {
+console.log(todo,"todo id")
 
 
+// function for togglecomplete passing in todo.id
     function handleCheck(){
-        props.toggleComplete(props.todo.id)
+        toggleComplete(todo.id)
+    }
+
+    //function for remove todo passing in todo.id
+    function removeItem(){
+        removeTodo(todo.id)
     }
     return (
         <div >
@@ -13,11 +20,12 @@ const Todo = (props) => {
 
             <li
             style={{
-                color:"red",
-                textDecoration: props.todo.completed ? "line-through" : null
+                // color:"red",
+                // if todo.completed is true then put a line through task, if not, dont
+                textDecoration: todo.completed ? "line-through" : null
             }}
-            >{props.todo}</li>
-            <button>x</button>
+            >{todo.task}</li>
+            <button onClick={removeItem}>Remove</button>
         </div>
     )
 }
