@@ -17,7 +17,7 @@ function TodoHook() {
       //map through todos, for every todo who's id matches the id clicked on,
       //return everything from the todo except do the opposite of what completed is
       todos.map((todo) => {
-        if (todo.task === id) {
+        if (todo.id === id) {
           return {
             ...todo,
             completed: !todo.completed,
