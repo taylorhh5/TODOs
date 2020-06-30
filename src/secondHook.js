@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 const SecondHook = () => {
 
@@ -34,9 +34,35 @@ console.log(todos,"todos")
         // setTodos([...todos, inputedTodo]);
     }
 
+  
+    function removeTodo(idFromButton) {
+        setTodos(todos.filter((todo) => todo.id !== idFromButton));
+      }
+
+
+      function checkComplete(id){
+          setTodos(
+              todos.map((todo) =>{
+                  if (todo.id ==id){
+                      return{
+                          ...todo,
+                          completed: !todo.completed,
+                      }
+                  }
+                  return todo;
+              })
+          )
+      }
+function clearCompleted(){
+    setTodos(todos.filter((todo => !todo.completed)))
+}
+
+    
     return (
         <div>
             <h1>Second todo hook</h1>
+
+            <button onClick={clearCompleted}>Clear Completed</button>
             
             <input
             type="text"
@@ -50,8 +76,15 @@ console.log(todos,"todos")
             <button onClick={addTodo}>Add Todo</button>
 
             {todos.map((item) =>{
-                return <p key={item.id}>{item.task}</p>
-            })}
+                return <div>
+                    <input type="checkbox" onClick={(e) => checkComplete (item.id)}/>
+                    <h1 key={item.id} style={{textDecoration:item.completed ? "line-through" : null}}>{item.task} </h1>
+                <button onClick={(e) => removeTodo(item.id)}>Delete</button>
+                {/* <button onClick={ removeItem}>Delete</button> */}
+
+                </div>
+            }) }
+
         </div>
     )
 }

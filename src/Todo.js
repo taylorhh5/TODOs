@@ -12,6 +12,8 @@ console.log(todo,"todo id")
     //function for remove todo passing in todo.id
     function removeItem(){
         removeTodo(todo.id)
+        // console.log(todo.id,"todo-idddd")
+
     }
     return (
         <div >

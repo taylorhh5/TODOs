@@ -28,10 +28,13 @@ It needs a handleChange to connect the inputed typed text to the state.
         setTodoInput({...todoInput, task: event.target.value})
     }
 
-It needs a submit button
+It needs a submit button.
 
 Step 3:
-Map over todos
+Map over todos.
+ {todos.map((item) =>{
+                return <p key={item.id}>{item.task}</p>
+            })}
 
 
 
