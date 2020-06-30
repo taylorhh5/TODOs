@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import TodoHook from './TodoHook.js'
+import SecondHook from './secondHook.js'
 
 class App extends React.Component {
   //for class component
@@ -60,6 +61,7 @@ class App extends React.Component {
         })}
 
         <TodoHook/>
+        <SecondHook/>
       </div>
     );
   }
